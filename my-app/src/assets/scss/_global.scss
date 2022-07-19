@@ -1,0 +1,10 @@
+.app {
+  padding: 1em;
+
+  .todos-list {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1em;
+  }
+}

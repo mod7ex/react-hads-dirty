@@ -1,0 +1,69 @@
+.todo {
+  background-color: rgb(0, 255, 0);
+  max-width: 20em;
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: 0 0 5px black;
+
+  &:hover {
+    box-shadow: 0 0 10px black;
+  }
+
+  .todo-header {
+    border-bottom: 1px solid rgb(158, 158, 158);
+    padding: 0.5em 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      margin-left: 0.9em;
+      max-width: 1.3em;
+
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .todo-content {
+    position: relative;
+
+    p.todo-body {
+      padding: 0.5em;
+      word-break: break-all;
+    }
+
+    textarea {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      padding: 0.9em;
+
+      outline: none;
+      border: none;
+      resize: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  &.done {
+    background-color: rgb(0, 129, 0.3) !important;
+
+    .todo-content {
+      p.todo-body {
+        text-decoration: line-through;
+        color: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+}
