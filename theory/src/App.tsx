@@ -4,10 +4,12 @@
 // import UseRef from "./components/useRef";
 // import UseMemo from "./components/useMemo";
 // import UseCallback from "./components/useCallback";
-import UseReducer from "./components/useReducer";
+// import UseReducer from "./components/useReducer";
+// import UseTransition from "./components/useTransition";
+import UseDeferredValue from "./components/useDeferredValue";
 
 function App() {
-  return <UseReducer />;
+  return <UseDeferredValue />;
 }
 
 export default App;
