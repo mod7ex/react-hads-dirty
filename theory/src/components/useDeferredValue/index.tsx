@@ -12,7 +12,8 @@ export default function UseDeferredValue() {
   return (
     <>
       <input type="text" value={input} onChange={handelChange} />
-      <List input={input} />
+      {/* Commented just for bug */}
+      {/* <List input={input} /> */}
     </>
   );
 }
