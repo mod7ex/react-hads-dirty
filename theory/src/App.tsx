@@ -12,10 +12,11 @@
 // import UseLayoutEffectModal from "./components/useLayoutEffect/modal";
 // import UseImperativeHandel from "./components/useImperativeHandel";
 // import ExUseImperativeHandel from "./components/useImperativeHandel/ex";
-import UseId from "./components/useId";
+// import UseId from "./components/useId";
+import CustomHooks from "./components/custom-hooks";
 
 function App() {
-  return <UseId />;
+  return <CustomHooks />;
 }
 
 export default App;
