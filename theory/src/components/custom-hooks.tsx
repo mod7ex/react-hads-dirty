@@ -1,9 +1,13 @@
+import { useCallback, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useUpdateLogger from "../hooks/useUpdateLogger";
 import useToggle from "../hooks/useToggle";
 import useTimeout from "../hooks/useTimeout";
-import { useState } from "react";
+import useDebounce from "../hooks/useDebounce";
+import useUpdateEffect from "../hooks/useUpdateEffect";
+
 /*
+
 export default function CustomHooks_0() {
   const [name, setName] = useLocalStorage<string>("my_name", "Mourad EL CADI");
 
@@ -16,11 +20,19 @@ export default function CustomHooks_0() {
     </>
   );
 }
+
 */
 
-export default function UseToggle() {
+/*
+
+export default function CustomHooks_1() {
   const [isSomething, toggleIsSomething] = useToggle();
+
   const [count, setCount] = useState(0);
+
+  // const { clear, reset } = useTimeout(useCallback(() => setCount((v) => v + 1)), 3000);
+  // we use <useRef> to allow the function to stay the same --> no need for <useCallback>
+
   const { clear, reset } = useTimeout(() => setCount((v) => v + 1), 3000);
 
   return (
@@ -44,5 +56,36 @@ export default function UseToggle() {
       <button onClick={reset}>Reset</button>
       <button onClick={clear}>Clear</button>
     </>
+  );
+}
+
+*/
+
+/*
+export default function CustomHooks_2() {
+  const [count, setCount] = useState(10);
+
+  useDebounce(() => alert(count), 3000, [count]);
+
+  return (
+    <div>
+      <div>{count}</div>
+      <button onClick={() => setCount((v) => v + 1)}>Increment</button>
+    </div>
+  );
+}
+
+*/
+
+export default function CustomHooks_3() {
+  const [count, setCount] = useState(0);
+
+  useUpdateEffect(() => alert(count), [count]);
+
+  return (
+    <div>
+      <div>{count}</div>
+      <button onClick={() => setCount((v) => v + 1)}>Increment</button>
+    </div>
   );
 }

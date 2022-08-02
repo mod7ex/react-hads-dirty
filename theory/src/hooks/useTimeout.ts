@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef } from "react";
 
-export default function useToggle(cb: Function, delay: number) {
+export default function useTimeout(cb: Function, delay: number) {
   const callbackRef = useRef(cb);
+
   const timerRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {

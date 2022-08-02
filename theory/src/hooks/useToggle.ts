@@ -9,8 +9,8 @@ export default function useToggle(initlaState: boolean = false) {
   const [state, setState] = useState(initlaState);
 
   const toggle = (value?: any) => {
-    let target = value instanceof Function ? value(state) : value;
-    setState((v) => (typeof target === "boolean" ? value : !v));
+    let _value = value instanceof Function ? value(state) : value;
+    setState((v) => (typeof _value === "boolean" ? value : !v));
   };
 
   return [state, toggle] as const;
