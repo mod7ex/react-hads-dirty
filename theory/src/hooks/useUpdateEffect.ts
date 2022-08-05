@@ -1,9 +1,15 @@
 import { useRef, useEffect } from "react";
 
 export default function useDebounce(cb: Function, dependencies: any[]) {
-  const firstRenderRef = useRef(true);
+  const firstRenderRef = useRef<boolean | undefined>(undefined);
 
   useEffect(() => {
+    console.log("rendered");
+    if (firstRenderRef.current === undefined) {
+      firstRenderRef.current = true;
+      return;
+    }
+
     if (firstRenderRef.current) {
       firstRenderRef.current = false;
       return;

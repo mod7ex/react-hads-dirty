@@ -5,6 +5,9 @@ import useToggle from "../hooks/useToggle";
 import useTimeout from "../hooks/useTimeout";
 import useDebounce from "../hooks/useDebounce";
 import useUpdateEffect from "../hooks/useUpdateEffect";
+import useArray from "../hooks/useArray";
+import usePrevious from "../hooks/usePrevious";
+import useStateWithHistory from "../hooks/useStateWithHistory";
 
 /*
 
@@ -77,6 +80,8 @@ export default function CustomHooks_2() {
 
 */
 
+/*
+
 export default function CustomHooks_3() {
   const [count, setCount] = useState(0);
 
@@ -87,5 +92,73 @@ export default function CustomHooks_3() {
       <div>{count}</div>
       <button onClick={() => setCount((v) => v + 1)}>Increment</button>
     </div>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHooks_4() {
+  const { array, set, push, remove, filter, update, clear } = useArray([1, 2, 3, 4, 5, 6]);
+
+  return (
+    <>
+      <div>{array.join(", ")}</div>
+      <br />
+      <button onClick={() => set([1, 2])}> set to 1, 2 </button>
+      <br />
+      <button onClick={() => push(7)}> push 7 </button>
+      <br />
+      <button onClick={() => remove(1)}> remove second element </button>
+      <br />
+      <button onClick={() => filter((v: number) => v < 5)}> keep number less than 4 </button>
+      <br />
+      <button onClick={() => update(1, 9)}> change second element to 9 </button>
+      <br />
+      <button onClick={() => clear()}> clear </button>
+    </>
+  );
+}
+
+*/
+
+/*
+export default function CustomHooks_5() {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState("Mourad");
+  const previousCount = usePrevious(count);
+
+  return (
+    <>
+      <div>
+        {count} - {previousCount}
+      </div>
+      <div>{name} </div>
+      <button onClick={() => setCount((v) => v + 1)}>Increment</button>
+      <button onClick={() => setName("EL CADI")}>change name</button>
+    </>
+  );
+}
+
+*/
+
+export default function CustomHooks_6() {
+  const [count, setCount, { history, pointer, back, forward, go }] = useStateWithHistory(1);
+  const [name, setName] = useState("Mourad");
+
+  return (
+    <>
+      <div>{count}</div>
+      <div> {history.join(", ")} </div>
+      <div>pointer {pointer}</div>
+      <div>{name}</div>
+      <button onClick={() => setCount((v: number) => v * 2)}>double</button>
+      <button onClick={() => setCount((v: number) => v + 1)}>increment</button>
+      <button onClick={back}>back</button>
+      <button onClick={forward}>forward</button>
+      <button onClick={() => go(2)}>Go To Index 2</button>
+      <button onClick={() => setName("EL CADI")}>change name</button>
+    </>
   );
 }
