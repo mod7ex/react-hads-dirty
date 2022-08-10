@@ -1,13 +1,16 @@
-import { useCallback, useState } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
-import useUpdateLogger from "../hooks/useUpdateLogger";
-import useToggle from "../hooks/useToggle";
-import useTimeout from "../hooks/useTimeout";
-import useDebounce from "../hooks/useDebounce";
-import useUpdateEffect from "../hooks/useUpdateEffect";
-import useArray from "../hooks/useArray";
-import usePrevious from "../hooks/usePrevious";
-import useStateWithHistory from "../hooks/useStateWithHistory";
+import { HTMLAttributes, useCallback, useState } from "react";
+// import useLocalStorage from "../hooks/useLocalStorage";
+// import useUpdateLogger from "../hooks/useUpdateLogger";
+// import useToggle from "../hooks/useToggle";
+// import useTimeout from "../hooks/useTimeout";
+// import useDebounce from "../hooks/useDebounce";
+// import useUpdateEffect from "../hooks/useUpdateEffect";
+// import useArray from "../hooks/useArray";
+// import usePrevious from "../hooks/usePrevious";
+// import useStateWithHistory from "../hooks/useStateWithHistory";
+// import { useSessionStorage, useLocalStorage } from "../hooks/useStorage";
+// import useAsync from "../hooks/useAsync";
+import useFetch from "../hooks/useFetch";
 
 /*
 
@@ -143,8 +146,11 @@ export default function CustomHooks_5() {
 
 */
 
+/*
+
 export default function CustomHooks_6() {
   const [count, setCount, { history, pointer, back, forward, go }] = useStateWithHistory(1);
+
   const [name, setName] = useState("Mourad");
 
   return (
@@ -153,12 +159,80 @@ export default function CustomHooks_6() {
       <div> {history.join(", ")} </div>
       <div>pointer {pointer}</div>
       <div>{name}</div>
+
       <button onClick={() => setCount((v: number) => v * 2)}>double</button>
       <button onClick={() => setCount((v: number) => v + 1)}>increment</button>
       <button onClick={back}>back</button>
       <button onClick={forward}>forward</button>
       <button onClick={() => go(2)}>Go To Index 2</button>
       <button onClick={() => setName("EL CADI")}>change name</button>
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHooks_7() {
+  const [name, setName, removeName] = useSessionStorage("name", "EL CADI");
+  const [age, setAge, removeAge] = useLocalStorage("age", 24);
+
+  return (
+    <>
+      <h2>
+        {name} - {age}
+      </h2>
+
+      <button onClick={() => setName("Modex987")}>Set name</button>
+      <button onClick={() => setAge(18)}>Set age</button>
+      <button onClick={removeName}>Remove name</button>
+      <button onClick={removeAge}>Remove age</button>
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHooks_8() {
+  const [count, setCount] = useState(0);
+
+  const { loading, error, value } = useAsync<string>(() => {
+    return new Promise((resolve, reject) => {
+      const success = Math.random() * 10 < 5;
+      setTimeout(() => {
+        success ? resolve("Hi") : reject("Error");
+      }, 2000);
+    });
+  }, [count]);
+
+  return (
+    <>
+      <div>Loading: {loading.toString()}</div>
+      <div>value: {value}</div>
+      <div>error: {error}</div>
+      <br />
+      <h3>count: {count}</h3>
+      <button onClick={() => setCount((v) => v + 1)}>increment</button>
+    </>
+  );
+}
+
+*/
+
+export default function CustomHooks_9() {
+  const [id, setId] = useState(1);
+  const { loading, error, value } = useFetch<object>(`https://jsonplaceholder.typicode.com/todos/${id}`, {}, [id]);
+
+  return (
+    <>
+      <div>id: {id}</div>
+      <button onClick={() => setId((c) => c + 1)}>increment Id</button>
+      <div>Loading: {loading.toString()}</div>
+      <div>Error: {JSON.stringify(error, null, 2)}</div>
+      <div>Value: {JSON.stringify(value, null, 2)}</div>
     </>
   );
 }
