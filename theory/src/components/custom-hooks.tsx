@@ -1,4 +1,4 @@
-import { HTMLAttributes, useCallback, useState } from "react";
+import { HTMLAttributes, MutableRefObject, useCallback, useEffect, useRef, useState } from "react";
 // import useLocalStorage from "../hooks/useLocalStorage";
 // import useUpdateLogger from "../hooks/useUpdateLogger";
 // import useToggle from "../hooks/useToggle";
@@ -10,7 +10,9 @@ import { HTMLAttributes, useCallback, useState } from "react";
 // import useStateWithHistory from "../hooks/useStateWithHistory";
 // import { useSessionStorage, useLocalStorage } from "../hooks/useStorage";
 // import useAsync from "../hooks/useAsync";
-import useFetch from "../hooks/useFetch";
+// import useFetch from "../hooks/useFetch";
+// import useScript from "../hooks/useScript";
+import useDeepCompareEffect from "../hooks/useDeepCompareEffect";
 
 /*
 
@@ -222,6 +224,7 @@ export default function CustomHooks_8() {
 
 */
 
+/*
 export default function CustomHooks_9() {
   const [id, setId] = useState(1);
   const { loading, error, value } = useFetch<object>(`https://jsonplaceholder.typicode.com/todos/${id}`, {}, [id]);
@@ -233,6 +236,52 @@ export default function CustomHooks_9() {
       <div>Loading: {loading.toString()}</div>
       <div>Error: {JSON.stringify(error, null, 2)}</div>
       <div>Value: {JSON.stringify(value, null, 2)}</div>
+    </>
+  );
+}
+*/
+
+/*
+
+export default function CustomHooks_10() {
+  const { loading, error } = useScript(`https://code.jquery.com/jquery-3.6.0.min.js`);
+
+  if (loading) return <div>loading ...</div>;
+  if (error) return <div>Error ...</div>;
+  return <div>{window.$(window).width()}</div>;
+}
+
+*/
+
+export default function CustomHooks_11() {
+  const [age, setAge] = useState(0);
+  const [otherCount, setOtherCount] = useState(0);
+
+  const useEffectCountRef = useRef() as MutableRefObject<HTMLSpanElement>;
+  const useDeepCompareEffectCountRef = useRef() as MutableRefObject<HTMLSpanElement>;
+
+  const person = { age, name: "Mourad" };
+
+  useEffect(() => {
+    useEffectCountRef.current.textContent = `${parseInt(useEffectCountRef.current.textContent!) + 1}`;
+  }, [person]);
+
+  useDeepCompareEffect(() => {
+    useDeepCompareEffectCountRef.current.textContent = `${parseInt(useDeepCompareEffectCountRef.current.textContent!) + 1}`;
+  }, [person]);
+
+  return (
+    <>
+      <div>
+        useEffect: <span ref={useEffectCountRef}>0</span>
+      </div>
+      <div>
+        useDeepCompareEffect: <span ref={useDeepCompareEffectCountRef}>0</span>
+      </div>
+      <div> Other Count: {otherCount} </div>
+      <div> Person: {JSON.stringify(person)} </div>
+      <button onClick={() => setAge((v) => v + 1)}> Increment Age </button>
+      <button onClick={() => setOtherCount((v) => v + 1)}> Increment Other Count </button>
     </>
   );
 }
