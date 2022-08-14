@@ -1,4 +1,7 @@
-import { HTMLAttributes, MutableRefObject, useCallback, useEffect, useRef, useState } from "react";
+import React from // useMemo, // useEffect, // useCallback, // MutableRefObject, // HTMLAttributes,
+// useRef,
+"react";
+
 // import useLocalStorage from "../hooks/useLocalStorage";
 // import useUpdateLogger from "../hooks/useUpdateLogger";
 // import useToggle from "../hooks/useToggle";
@@ -12,7 +15,8 @@ import { HTMLAttributes, MutableRefObject, useCallback, useEffect, useRef, useSt
 // import useAsync from "../hooks/useAsync";
 // import useFetch from "../hooks/useFetch";
 // import useScript from "../hooks/useScript";
-import useDeepCompareEffect from "../hooks/useDeepCompareEffect";
+// import useDeepCompareEffect from "../hooks/useDeepCompareEffect";
+import useEventListener from "../hooks/useEventListener";
 
 /*
 
@@ -253,6 +257,8 @@ export default function CustomHooks_10() {
 
 */
 
+/*
+
 export default function CustomHooks_11() {
   const [age, setAge] = useState(0);
   const [otherCount, setOtherCount] = useState(0);
@@ -260,6 +266,7 @@ export default function CustomHooks_11() {
   const useEffectCountRef = useRef() as MutableRefObject<HTMLSpanElement>;
   const useDeepCompareEffectCountRef = useRef() as MutableRefObject<HTMLSpanElement>;
 
+  // const person = useMemo(() => ({ age, name: "Mourad" }), [age]);
   const person = { age, name: "Mourad" };
 
   useEffect(() => {
@@ -284,4 +291,50 @@ export default function CustomHooks_11() {
       <button onClick={() => setOtherCount((v) => v + 1)}> Increment Other Count </button>
     </>
   );
+}
+
+*/
+
+/*
+export default function CustomHooks_12() {
+  const [key, setKey] = useState("");
+
+  useEventListener("keyup", function (e) {
+    setKey(e.key);
+  });
+
+  return <div> Last key: {key} </div>;
+}
+*/
+
+/*
+
+// https://reactjs.org/docs/handling-events.html
+
+export default class Toggle extends React.Component {
+  public state: { isToggleOn: boolean };
+
+  constructor(props: any) {
+    super(props);
+    this.state = { isToggleOn: true };
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this); // <<------- this line is so important
+  }
+
+  handleClick() {
+    this.setState((prevState: { isToggleOn: boolean }) => ({
+      isToggleOn: !prevState.isToggleOn,
+    }));
+  }
+
+  render() {
+    return <button onClick={this.handleClick}>{this.state.isToggleOn ? "ON" : "OFF"}</button>;
+  }
+}
+
+*/
+
+export default function CustomHooks_13() {
+  return <></>;
 }
