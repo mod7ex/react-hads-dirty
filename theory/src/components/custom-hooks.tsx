@@ -1,7 +1,4 @@
-import React from // useMemo, // useEffect, // useCallback, // MutableRefObject, // HTMLAttributes,
-// useRef,
-"react";
-
+import { MutableRefObject, useRef } from "react";
 // import useLocalStorage from "../hooks/useLocalStorage";
 // import useUpdateLogger from "../hooks/useUpdateLogger";
 // import useToggle from "../hooks/useToggle";
@@ -16,7 +13,10 @@ import React from // useMemo, // useEffect, // useCallback, // MutableRefObject,
 // import useFetch from "../hooks/useFetch";
 // import useScript from "../hooks/useScript";
 // import useDeepCompareEffect from "../hooks/useDeepCompareEffect";
-import useEventListener from "../hooks/useEventListener";
+// import useEventListener from "../hooks/useEventListener";
+// import useIntersectionObserver from "../hooks/useIntersectionObserver";
+// import useWindowSize from "../hooks/useWindowSize";
+import useMediaQuery from "../hooks/useMediaQuery";
 
 /*
 
@@ -335,6 +335,113 @@ export default class Toggle extends React.Component {
 
 */
 
+/*
+
 export default function CustomHooks_13() {
+  const headerTowRef = useRef() as MutableRefObject<HTMLHeadingElement>;
+
+  const containerRef = useRef() as MutableRefObject<HTMLDivElement>;
+
+  const visible = useIntersectionObserver(headerTowRef, "-200px", containerRef);
+
+  return (
+    <div ref={containerRef} style={{ height: "100vh", overflowY: "scroll" }}>
+      <h1>header</h1>
+
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus
+        suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem
+        quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate
+        blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis
+        sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque
+        laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit
+        reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem
+        ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit
+        ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam
+        non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis
+        architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis
+        sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque
+        laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit
+        reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem
+        ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit
+        ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam
+        non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis
+        architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis
+        sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque
+        laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit
+        reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem
+        ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit
+        ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam
+        non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis
+        architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis
+        sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque
+        laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit
+        reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem
+        ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit
+        ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam
+        non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis
+        architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis
+        sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque
+        laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit
+        reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem
+        ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit
+        ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam
+        non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis
+        architecto saepe!
+      </div>
+
+      <h1 ref={headerTowRef}>header 2 {visible && "(visible)"} </h1>
+
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus
+        suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem
+        quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate
+        blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis
+        sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque
+        laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit
+        reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem
+        ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit
+        ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam
+        non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis
+        architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis
+        sint, necessitatibus suscipit ipsam facere itaque laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, est? Veritatis sint, necessitatibus suscipit ipsam facere itaque
+        laborum adipisci magnam rem quisquam non dolorem, sit reiciendis voluptate blanditiis architecto saepe!
+      </div>
+    </div>
+  );
+}
+
+*/
+
+/*
+export default function CustomHooks_14() {
+  const size = useWindowSize();
+
+  return (
+    <div>
+      {size.width} x {size.height}
+    </div>
+  );
+}
+*/
+
+export default function CustomHooks_14() {
+  // const size = useMediaQuery();
+
   return <></>;
 }
