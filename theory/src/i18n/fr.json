@@ -1,0 +1,5 @@
+{
+  "hi": "Salut",
+  "bye": "Au revoir",
+  "nested": { "value": "Du text" }
+}

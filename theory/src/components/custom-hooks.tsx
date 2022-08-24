@@ -1,4 +1,3 @@
-import { MutableRefObject, useRef } from "react";
 // import useLocalStorage from "../hooks/useLocalStorage";
 // import useUpdateLogger from "../hooks/useUpdateLogger";
 // import useToggle from "../hooks/useToggle";
@@ -16,11 +15,27 @@ import { MutableRefObject, useRef } from "react";
 // import useEventListener from "../hooks/useEventListener";
 // import useIntersectionObserver from "../hooks/useIntersectionObserver";
 // import useWindowSize from "../hooks/useWindowSize";
-import useMediaQuery from "../hooks/useMediaQuery";
+// import useMediaQuery from "../hooks/useMediaQuery";
+// import useGeoLocation from "../hooks/useGeoLocation";
+// import useStateWithValidation from "../hooks/useStateWithValidation";
+// import useSize from "../hooks/useSize";
+// import useEffectOnce from "../hooks/useEffectOnce";
+// import useClickOutside from "../hooks/useClickOutside";
+// import useDarkMode from "../hooks/useDarkMode";
+// import useCopyToClipBoard from "../hooks/useCopyToClipBoard";
+// import useCookie from "../hooks/useCookie";
+// import useTranslate from "../hooks/useTranslate";
+// import useOnlineStatus from "../hooks/useOnlineStatus";
+// import useRenderCount from "../hooks/useRenderCount";
+// import useRenderCount from "../hooks/useRenderCount";
+// import useDebugInfo from "../hooks/useDebugInfo";
+// import useHover from "../hooks/useHover";
+import { MutableRefObject, useRef } from "react";
+import useLongPress from "../hooks/useLongPress";
 
 /*
 
-export default function CustomHooks_0() {
+export default function CustomHook_0() {
   const [name, setName] = useLocalStorage<string>("my_name", "Mourad EL CADI");
 
   useUpdateLogger(name); // logging <name> variable changes
@@ -37,7 +52,7 @@ export default function CustomHooks_0() {
 
 /*
 
-export default function CustomHooks_1() {
+export default function CustomHook_1() {
   const [isSomething, toggleIsSomething] = useToggle();
 
   const [count, setCount] = useState(0);
@@ -74,7 +89,7 @@ export default function CustomHooks_1() {
 */
 
 /*
-export default function CustomHooks_2() {
+export default function CustomHook_2() {
   const [count, setCount] = useState(10);
 
   useDebounce(() => alert(count), 3000, [count]);
@@ -91,7 +106,7 @@ export default function CustomHooks_2() {
 
 /*
 
-export default function CustomHooks_3() {
+export default function CustomHook_3() {
   const [count, setCount] = useState(0);
 
   useUpdateEffect(() => alert(count), [count]);
@@ -108,7 +123,7 @@ export default function CustomHooks_3() {
 
 /*
 
-export default function CustomHooks_4() {
+export default function CustomHook_4() {
   const { array, set, push, remove, filter, update, clear } = useArray([1, 2, 3, 4, 5, 6]);
 
   return (
@@ -133,7 +148,7 @@ export default function CustomHooks_4() {
 */
 
 /*
-export default function CustomHooks_5() {
+export default function CustomHook_5() {
   const [count, setCount] = useState(0);
   const [name, setName] = useState("Mourad");
   const previousCount = usePrevious(count);
@@ -154,7 +169,7 @@ export default function CustomHooks_5() {
 
 /*
 
-export default function CustomHooks_6() {
+export default function CustomHook_6() {
   const [count, setCount, { history, pointer, back, forward, go }] = useStateWithHistory(1);
 
   const [name, setName] = useState("Mourad");
@@ -180,7 +195,7 @@ export default function CustomHooks_6() {
 
 /*
 
-export default function CustomHooks_7() {
+export default function CustomHook_7() {
   const [name, setName, removeName] = useSessionStorage("name", "EL CADI");
   const [age, setAge, removeAge] = useLocalStorage("age", 24);
 
@@ -202,7 +217,7 @@ export default function CustomHooks_7() {
 
 /*
 
-export default function CustomHooks_8() {
+export default function CustomHook_8() {
   const [count, setCount] = useState(0);
 
   const { loading, error, value } = useAsync<string>(() => {
@@ -229,7 +244,7 @@ export default function CustomHooks_8() {
 */
 
 /*
-export default function CustomHooks_9() {
+export default function CustomHook_9() {
   const [id, setId] = useState(1);
   const { loading, error, value } = useFetch<object>(`https://jsonplaceholder.typicode.com/todos/${id}`, {}, [id]);
 
@@ -247,7 +262,7 @@ export default function CustomHooks_9() {
 
 /*
 
-export default function CustomHooks_10() {
+export default function CustomHook_10() {
   const { loading, error } = useScript(`https://code.jquery.com/jquery-3.6.0.min.js`);
 
   if (loading) return <div>loading ...</div>;
@@ -259,7 +274,7 @@ export default function CustomHooks_10() {
 
 /*
 
-export default function CustomHooks_11() {
+export default function CustomHook_11() {
   const [age, setAge] = useState(0);
   const [otherCount, setOtherCount] = useState(0);
 
@@ -296,7 +311,7 @@ export default function CustomHooks_11() {
 */
 
 /*
-export default function CustomHooks_12() {
+export default function CustomHook_12() {
   const [key, setKey] = useState("");
 
   useEventListener("keyup", function (e) {
@@ -337,7 +352,7 @@ export default class Toggle extends React.Component {
 
 /*
 
-export default function CustomHooks_13() {
+export default function CustomHook_13() {
   const headerTowRef = useRef() as MutableRefObject<HTMLHeadingElement>;
 
   const containerRef = useRef() as MutableRefObject<HTMLDivElement>;
@@ -429,7 +444,7 @@ export default function CustomHooks_13() {
 */
 
 /*
-export default function CustomHooks_14() {
+export default function CustomHook_14() {
   const size = useWindowSize();
 
   return (
@@ -440,8 +455,332 @@ export default function CustomHooks_14() {
 }
 */
 
-export default function CustomHooks_14() {
-  // const size = useMediaQuery();
+/*
 
-  return <></>;
+export default function CustomHook_14() {
+  const isLarge = useMediaQuery("(min-width: 400px)");
+
+  return (
+    <>
+      <h1>Is width larger than 400px: {isLarge.toString()} </h1>
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHook_15() {
+  const {
+    loading,
+    error,
+    data: { latitude, longitude },
+  } = useGeoLocation({ enableHighAccuracy: true });
+
+  return (
+    <>
+      <div>Loading {loading ? "TRUE" : "FALSE"} </div>
+      <div>Error {error?.message} </div>
+      <div>
+        {latitude} x {longitude}
+      </div>
+    </>
+  );
+}
+
+*/
+
+/*
+export default function CustomHook_16() {
+  const [username, setUsername, isValide] = useStateWithValidation((v) => v.length > 5, "");
+
+  return (
+    <>
+      <div> valid: {isValide.toString()} </div>
+      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHook_17() {
+  const ref = useRef() as MutableRefObject<HTMLTextAreaElement>;
+
+  const size = useSize(ref);
+
+  return (
+    <>
+      <h2 style={{ marginBottom: "2em" }}> {JSON.stringify(size)} </h2>
+
+      <textarea ref={ref}></textarea>
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHook_18() {
+  const [count, setCount] = useState(0);
+
+  useEffectOnce(() => alert("Hi"));
+
+  return (
+    <>
+      <div>{count}</div>
+      <button onClick={() => setCount((c) => c + 1)}> Increment </button>
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHook_19() {
+  const [open, setOpen] = useState(true);
+
+  const modalRef = useRef() as MutableRefObject<HTMLDivElement>;
+
+  useClickOutside(modalRef, (e) => {
+    if ((e.target as HTMLElement).tagName === "BUTTON") return; // for ex
+
+    if (open) setOpen(false);
+  });
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open</button>
+
+      <div
+        ref={modalRef}
+        style={{
+          display: open ? "block" : "none",
+          backgroundColor: "blue",
+          color: "white",
+          width: "300px",
+          height: "200px",
+          position: "absolute",
+          top: "calc(50% - 50px)",
+          left: "calc(50% - 50px)",
+        }}
+      >
+        <span>Modal</span>
+      </div>
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHook_20() {
+  const [mode, setMode] = useDarkMode();
+
+  return (
+    <>
+      <button
+        onClick={() => setMode((v) => !v)}
+        style={{
+          border: `1px solid ${mode ? "white" : "black"}`,
+          background: "none",
+          color: mode ? "white" : "black",
+        }}
+      >
+        Toggle dark mode
+      </button>
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHook_21() {
+  const [copyToClipBoard, { success }] = useCopyToClipBoard();
+
+  return (
+    <>
+      <h1>12345</h1>
+      <button onClick={() => copyToClipBoard("Mourad EL CADI copied text")}> {success ? "Copied" : "Copy to clipboard"} </button>
+      <input type="text" />
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHook_22() {
+  const [value, update, remove] = useCookie("my_name", "Mourad");
+
+  return (
+    <>
+      <div>{value}</div>
+      <button onClick={() => update("EL CADI")}> change name to EL CADI </button>
+      <button onClick={remove}>delete name</button>
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHook_23() {
+  const { language, fallbackLanguage, setLanguage, setFallbackLanguage, t, LANGS, _$ } = useTranslate();
+
+  return (
+    <>
+      <div>language: {language}</div>
+      <div>fallback language: {fallbackLanguage}</div>
+
+      <hr />
+
+      <div>{t("hi")}</div>
+      <div>{t("bye")}</div>
+      <div>{t("car")}</div>
+ 
+      <div>{t("fffffffffff")}</div>
+      <div> {t("nested.value")}</div>
+
+      <hr />
+
+      <div>{_$.hi}</div>
+      <div>{_$.bye}</div>
+      <div>car: {_$.car}</div>
+ 
+      <div>{_$.fffffffffff}</div>
+      <div> {_$.nested?.value}</div>
+
+      <hr />
+
+      <button onClick={() => setLanguage(LANGS.FRENCH)}> Change to french </button>
+
+      <button onClick={() => setLanguage(LANGS.ENGLISH)}> Change to english </button>
+
+      <button onClick={() => setFallbackLanguage(LANGS.ENGLISH)}> set fallback to english </button>
+
+      <button onClick={() => setFallbackLanguage(LANGS.FRENCH)}> set fallback to french </button>
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHook_24() {
+  const online = useOnlineStatus();
+
+  return (
+    <>
+      {" "}
+      <h2>{online ? "Online" : "Offline"}</h2>{" "}
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHook_25() {
+  const [is, toggle] = useToggle(false);
+
+  const renderCount = useRenderCount();
+
+  return (
+    <>
+      <div>{is.toString()}</div>
+      <div>{renderCount}</div>
+      <button onClick={toggle}>toggle</button>
+    </>
+  );
+}
+
+*/
+
+/*
+function CustomHook_26({ bool, count }: Record<string, any>) {
+  const info = useDebugInfo<{ bool: boolean; count: number }>("CustomHook_26", { bool, count });
+
+  return (
+    <>
+      <div> {bool.toString()} </div>
+      <div> {count} </div>
+      <div> {JSON.stringify(info, null, 2)} </div>
+    </>
+  );
+}
+
+export default function DebugInfoComponent() {
+  const [bool, toggle] = useToggle(false);
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <CustomHook_26 bool={bool} count={count} />
+      <button onClick={toggle}>toggle</button>
+      <button onClick={() => setCount((v) => v + 1)}>increment</button>
+    </>
+  );
+}
+
+*/
+
+/*
+
+export default function CustomHook_27() {
+  const elementRef = useRef() as MutableRefObject<HTMLDivElement>;
+
+  const hovered = useHover(elementRef);
+
+  return (
+    <>
+      <div
+        ref={elementRef}
+        style={{
+          backgroundColor: hovered ? "blue" : "red",
+          width: "100px",
+          height: "100px",
+          position: "absolute",
+          top: "cal(50% - 50px)",
+          left: "cal(50% - 50px)",
+        }}
+      ></div>
+    </>
+  );
+}
+
+*/
+
+export default function CustomHook_27() {
+  const elementRef = useRef() as MutableRefObject<HTMLDivElement>;
+
+  useLongPress(elementRef, () => alert("long pressed"));
+
+  return (
+    <>
+      <div
+        ref={elementRef}
+        style={{
+          backgroundColor: "blue",
+          width: "100px",
+          height: "100px",
+          position: "absolute",
+          top: "cal(50% - 50px)",
+          left: "cal(50% - 50px)",
+        }}
+      ></div>
+    </>
+  );
 }

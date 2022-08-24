@@ -1,0 +1,6 @@
+{
+  "hi": "Hello",
+  "bye": "GoodBye",
+  "nested": { "value": "Some text" },
+  "car": "Car"
+}

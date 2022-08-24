@@ -2,24 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import "./style.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
+// in strict mode hooks and functions will run twice <https://stackoverflow.com/a/61091205/13278193>
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
-
-/*
-
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(<input value="hi" />);
-
-setTimeout(function () {
-  ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(<input value={undefined} />);
-}, 3000);
-
-*/
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
