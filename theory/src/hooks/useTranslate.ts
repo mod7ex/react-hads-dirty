@@ -37,10 +37,9 @@ const recursionProxyWithObjectFallback = <T extends ObjectOfNested<string>, L ex
 const getNestedValue = <T extends object>(target: T, keys: string[]): string => {
   // @ts-ignore
   let nestedTarget = target[keys[0]];
-  // @ts-ignore
   if (isObject(nestedTarget) && nestedTarget !== null) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_, ...rest] = keys; // deep copy
+    const [_, ...rest] = keys;
     return getNestedValue(nestedTarget, rest);
   }
 

@@ -7,8 +7,3 @@ export enum LANGS {
   FRENCH = "fr",
   ENGLISH = "en",
 }
-
-// export default {
-//   en,
-//   fr,
-// } as Record<LANGS, LanguageDictionaryStructure>;
