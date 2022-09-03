@@ -9,15 +9,6 @@ type TState = { items: TProduct[]; show_cart: boolean; changed: boolean };
 
 const initialState: TState = {
   items: [],
-
-  // get total(): number {
-  //   return this.items.reduce((prev, { quantity, price }) => prev + quantity * price, 0);
-  // },
-
-  // get total_quantity(): number {
-  //   return this.items.reduce((prev, { quantity }) => prev + quantity, 0);
-  // },
-
   show_cart: false,
   changed: false,
 };

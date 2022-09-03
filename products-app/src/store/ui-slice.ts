@@ -21,6 +21,7 @@ const uiSlice = createSlice({
   reducers: {
     notify(state, action: PayloadAction<Partial<UIState["notification"]>>) {
       const { open, message, type } = action.payload ?? {};
+
       state.notification.open = open ?? false;
       state.notification.message = message ?? "";
       state.notification.type = type;

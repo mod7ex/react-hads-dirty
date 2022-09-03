@@ -11,6 +11,7 @@ export const sendCartData = (cart: CartState) => {
         const data = await res.json();
         console.log(data);
         dispatch(uiActions.notify({ open: true, message: "Data saved successfully", type: "success" }));
+        dispatch(cartActions.setChanged());
       } catch (e: unknown) {
         console.log(e);
         dispatch(uiActions.notify({ open: true, message: "Faild to save data", type: "error" }));

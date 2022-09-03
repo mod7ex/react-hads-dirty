@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "./store";
 import Notification from "./components/Notification";
 // import { uiActions } from "./store/ui-slice";
 import { sendCartData, fetchCart } from "./store/cart-actions";
-import { cartActions } from "./store/cart-slice";
 
 let isFirstRender = true;
 
@@ -45,13 +44,11 @@ function App() {
       };
   
       saveInFireBase(JSON.stringify(cart));
-      */
+*/
 
       dispatch(sendCartData(cart));
-
-      dispatch(cartActions.setChanged());
     }
-  }, [cart]);
+  }, [dispatch, cart]);
 
   return (
     <div className="App">
