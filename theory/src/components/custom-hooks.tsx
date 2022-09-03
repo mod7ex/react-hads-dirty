@@ -24,14 +24,14 @@
 // import useDarkMode from "../hooks/useDarkMode";
 // import useCopyToClipBoard from "../hooks/useCopyToClipBoard";
 // import useCookie from "../hooks/useCookie";
-// import useTranslate from "../hooks/useTranslate";
+import useTranslate from "../hooks/useTranslate";
 // import useOnlineStatus from "../hooks/useOnlineStatus";
 // import useRenderCount from "../hooks/useRenderCount";
 // import useRenderCount from "../hooks/useRenderCount";
 // import useDebugInfo from "../hooks/useDebugInfo";
 // import useHover from "../hooks/useHover";
-import { MutableRefObject, useRef } from "react";
-import useLongPress from "../hooks/useLongPress";
+// import { MutableRefObject, useRef } from "react";
+// import useLongPress from "../hooks/useLongPress";
 
 /*
 
@@ -633,10 +633,8 @@ export default function CustomHook_22() {
 
 */
 
-/*
-
 export default function CustomHook_23() {
-  const { language, fallbackLanguage, setLanguage, setFallbackLanguage, t, LANGS, _$ } = useTranslate();
+  const { language, fallbackLanguage, setLanguage, setFallbackLanguage, t, SUPPORTED_LANGS, _$ } = useTranslate();
 
   return (
     <>
@@ -645,36 +643,46 @@ export default function CustomHook_23() {
 
       <hr />
 
-      <div>{t("hi")}</div>
-      <div>{t("bye")}</div>
-      <div>{t("car")}</div>
- 
-      <div>{t("fffffffffff")}</div>
-      <div> {t("nested.value")}</div>
+      <fieldset>
+        <legend>functional translation</legend>
+        <div>
+          <div>{t("hi")}</div>
+          <div>{t("bye")}</div>
+          <div>car: {t("car")}</div>
+          <div> {t("nested.value")}</div>
+        </div>
+
+        {/* @ts-ignore */}
+        <div>not existing key: {t("fffffffffff")}</div>
+      </fieldset>
 
       <hr />
 
-      <div>{_$.hi}</div>
-      <div>{_$.bye}</div>
-      <div>car: {_$.car}</div>
- 
-      <div>{_$.fffffffffff}</div>
-      <div> {_$.nested?.value}</div>
+      <fieldset>
+        <legend>object translation</legend>
+        <div>
+          <div>{_$.hi}</div>
+          <div>{_$.bye}</div>
+          <div>car: {_$.car}</div>
+          <div> {_$.nested?.value}</div>
+        </div>
+
+        {/* @ts-ignore */}
+        <div>not existing key: {_$.fffffffffff}</div>
+      </fieldset>
 
       <hr />
 
-      <button onClick={() => setLanguage(LANGS.FRENCH)}> Change to french </button>
+      <button onClick={() => setLanguage(SUPPORTED_LANGS.FRENCH)}> Change to french </button>
 
-      <button onClick={() => setLanguage(LANGS.ENGLISH)}> Change to english </button>
+      <button onClick={() => setLanguage(SUPPORTED_LANGS.ENGLISH)}> Change to english </button>
 
-      <button onClick={() => setFallbackLanguage(LANGS.ENGLISH)}> set fallback to english </button>
+      <button onClick={() => setFallbackLanguage(SUPPORTED_LANGS.ENGLISH)}> set fallback to english </button>
 
-      <button onClick={() => setFallbackLanguage(LANGS.FRENCH)}> set fallback to french </button>
+      <button onClick={() => setFallbackLanguage(SUPPORTED_LANGS.FRENCH)}> set fallback to french </button>
     </>
   );
 }
-
-*/
 
 /*
 
@@ -763,6 +771,7 @@ export default function CustomHook_27() {
 
 */
 
+/*
 export default function CustomHook_27() {
   const elementRef = useRef() as MutableRefObject<HTMLDivElement>;
 
@@ -784,3 +793,5 @@ export default function CustomHook_27() {
     </>
   );
 }
+
+*/

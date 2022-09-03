@@ -1,84 +1,56 @@
-import { isObject } from "../helpers";
 import useLocalStorage from "./useLocalStorage";
-import { LANGS, LanguageDictionaryStructure } from "../i18n";
-import { useState, useMemo, useCallback } from "react";
-import useAsync from "./useAsync";
+import { useState, useMemo, useCallback, useEffect } from "react";
+import en from "../i18n/en.json";
+// import useAsync from "./useAsync";
+import { getNestedValue, recursionProxyWithFallbackObject, recursionProxy } from "../helpers";
 
-const recursionProxy = <T extends ObjectOfNested<string>>(subject: T, fallback: string = ""): T =>
-  new Proxy(subject, {
-    get(target, key: string & keyof T) {
-      const nestedSubject: T[keyof T] = target[key];
+export enum SUPPORTED_LANGS {
+  ENGLISH = "en",
+  FRENCH = "fr",
+}
 
-      if (isObject(nestedSubject) && nestedSubject !== null) return recursionProxy(nestedSubject, fallback);
+type LangDictionary = typeof en;
 
-      // _ is a default fall back for that level
-      return nestedSubject ?? target._ ?? fallback;
-    },
-  }) as T;
-
-const recursionProxyWithObjectFallback = <T extends ObjectOfNested<string>, L extends T>(subject: L, objectFallback: T, fallback: string = ""): T =>
-  new Proxy(subject, {
-    get(target, key: string & keyof T) {
-      const nestedSubject: T[keyof T] = target[key];
-      const nestedFallbackObject = objectFallback[key] as object;
-
-      if (isObject(nestedSubject) && nestedSubject !== null) {
-        return recursionProxyWithObjectFallback(nestedSubject, nestedFallbackObject);
-      }
-
-      console.log(nestedFallbackObject);
-
-      // _ is a default fall back for that level
-      return nestedSubject ?? (isObject(nestedFallbackObject) ? recursionProxy(nestedFallbackObject) : nestedFallbackObject) ?? target._;
-    },
-  }) as T;
-
-// Fix: make types for this function
-const getNestedValue = <T extends object>(target: T, keys: string[]): string => {
-  // @ts-ignore
-  let nestedTarget = target[keys[0]];
-  if (isObject(nestedTarget) && nestedTarget !== null) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_, ...rest] = keys;
-    return getNestedValue(nestedTarget, rest);
-  }
-
-  return nestedTarget;
-};
+const FALLBACK_MESSAGE = "______EMPTY______";
 
 export default function useTranslate() {
-  const [lang, setLang] = useLocalStorage<LANGS>("language", LANGS.ENGLISH);
-  const [payload, setPayload] = useState<Partial<LanguageDictionaryStructure>>({});
+  const [lang, setLang] = useLocalStorage<SUPPORTED_LANGS>("language", SUPPORTED_LANGS.ENGLISH);
+  const [payload, setPayload] = useState<LangDictionary>(en);
 
-  const [fallback, setFallback] = useLocalStorage<LANGS>("fallback_language", LANGS.ENGLISH);
-  const [fallbackPayload, setFallbackPayload] = useState<Partial<LanguageDictionaryStructure>>({});
+  const [fallback, setFallback] = useLocalStorage<SUPPORTED_LANGS>("fallback_language", SUPPORTED_LANGS.ENGLISH);
+  const [fallbackPayload, setFallbackPayload] = useState<LangDictionary>(en);
 
-  useAsync(async () => {
-    const l = await import(`../i18n/${lang}.json`);
-    setPayload(l.default);
+  // three languages max will be imported adn we won't use tow of them
+
+  useEffect(() => {
+    import(`../i18n/${lang}.json`)
+      .then(({ default: data }) => {
+        setPayload(data);
+      })
+      .catch(() => {
+        setPayload(en);
+      });
   }, [lang]);
 
-  useAsync(async () => {
-    const l = await import(`../i18n/${fallback}.json`);
-    setFallbackPayload(l.default);
+  useEffect(() => {
+    import(`../i18n/${fallback}.json`)
+      .then(({ default: data }) => {
+        setFallbackPayload(data);
+      })
+      .catch(() => {
+        setFallbackPayload(en);
+      });
   }, [fallback]);
 
-  // functional translation
   const translate = useCallback(
-    (key: StringTreePaths<SetFallback<LanguageDictionaryStructure>>) => {
-      if (!key) return "";
-
-      return getNestedValue(payload, key.split(".")) ?? getNestedValue(fallbackPayload, key.split("."));
+    (key: StringTreePaths<SetFallback<LangDictionary>>) => {
+      return getNestedValue(payload, key.split(".")) ?? getNestedValue(recursionProxy(fallbackPayload, FALLBACK_MESSAGE), key.split("."));
     },
     [payload, fallbackPayload]
   );
 
-  // object translation
   const _$ = useMemo(() => {
-    let $ln = recursionProxy(payload);
-    let $fbln = recursionProxy(fallbackPayload);
-
-    return recursionProxyWithObjectFallback($ln, $fbln, "___") as SetFallback<LanguageDictionaryStructure>;
+    return recursionProxyWithFallbackObject(payload, fallbackPayload, FALLBACK_MESSAGE);
   }, [payload, fallbackPayload]);
 
   return {
@@ -87,7 +59,7 @@ export default function useTranslate() {
     setLanguage: setLang,
     setFallbackLanguage: setFallback,
     t: translate,
-    LANGS,
+    SUPPORTED_LANGS,
     _$,
   };
 }
