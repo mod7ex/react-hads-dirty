@@ -3,6 +3,7 @@ import { Routes, Route, Link, NavLink } from "react-router-dom";
 import Home from "./pages/Home";
 import BooksRoute from "./router/Books";
 import Redirect from "./pages/Redirect";
+import { AppNavLink } from "./router";
 // import About from "./pages/About";
 
 const LazyAbout = lazy(() => import(/* webpackChunkName: 'about_page' */ "./pages/About"));
@@ -31,9 +32,13 @@ function App() {
             </Link>
           </li>
           <li>
-            <NavLink style={({ isActive }) => ({ color: isActive ? "red" : "blue" })} to="/books">
+            {/* <NavLink style={({ isActive }) => ({ color: isActive ? "red" : "blue" })} to="/books">
               {({ isActive }) => (isActive ? "You are in Books page" : "Books")}
-            </NavLink>
+            </NavLink> */}
+
+            <AppNavLink style={({ isActive }) => ({ color: isActive ? "red" : "blue" })} to={{ name: "Book" }}>
+              {({ isActive }) => (isActive ? "You are in Books page" : "Books")}
+            </AppNavLink>
           </li>
           <li>
             <Link to="/about" state={{ message: "hi" }}>
