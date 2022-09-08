@@ -1,19 +1,8 @@
 import { trimChar } from "../utils";
-import { default as routes, IRouteStructures, IRouteStructure, TRoutes, TRoute } from "./routes";
+import { default as routes, IRouteStructures, IRouteStructure } from "./routes";
+import { type Props } from "./index";
 
 const isObject = (v: any): v is object => typeof v === "object";
-
-type RouteNames<T extends IRouteStructures> = T[number]["name"] | (T[number] extends infer U ? (U extends { readonly children: infer C extends readonly any[] } ? RouteNames<C> & string : never) : never);
-
-type PossibleRouteNames = RouteNames<TRoutes>;
-
-type ParamPicker<T extends `${string}`> = T extends `${string}:${infer P}/${infer R}` ? P | ParamPicker<R> : T extends `${string}:${infer P}` ? P : never;
-
-type RoutePath<T extends IRouteStructures, N extends PossibleRouteNames, I extends number[] = []> = I["length"] extends T["length"]
-  ? never
-  : (T[I["length"]]["name"] extends N ? T[I["length"]]["path"] : T[I["length"]] extends infer U extends { readonly children: readonly any[] } ? `${T[I["length"]]["path"]}/${RoutePath<U["children"], N>}` : never) | RoutePath<T, N, [...I, I["length"]]>;
-
-export type Params<N extends PossibleRouteNames> = ParamPicker<RoutePath<TRoutes, N>>;
 
 export const getRouteByName = <N extends PossibleRouteNames>(name: N, the_routes?: IRouteStructures): number[] | void => {
   if (Array.isArray(the_routes)) {
@@ -45,12 +34,11 @@ export const getPath = (arr: IRouteStructures | undefined, indexes: number[]): s
 };
 
 export const payloadToStringPath = <N extends PossibleRouteNames>(payload: Props<N>["to"]) => {
-  const _to = payload;
   let to = "";
 
-  if (isObject(_to)) {
+  if (isObject(payload)) {
     // @ts-ignore
-    const { name, params, query } = _to;
+    const { name, params, query } = payload;
 
     let way = getRouteByName(name, routes);
 
@@ -72,7 +60,7 @@ export const payloadToStringPath = <N extends PossibleRouteNames>(payload: Props
       }
     }
   } else {
-    to = _to;
+    to = payload;
   }
 
   return to;
