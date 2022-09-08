@@ -1,7 +1,6 @@
-import { IRouteStructures, TRoutes } from "../router/routes";
+import { IRouteStructures, TRoutes } from "../routes";
 
 declare global {
-
     type RouteNames<T extends IRouteStructures> =
         T[number]["name"]
         | (
@@ -33,5 +32,4 @@ declare global {
         ) | RoutePath<T, N, [...I, I["length"]]>;
 
     type Params<N extends PossibleRouteNames> = ParamPicker<RoutePath<TRoutes, N>>;
-
 }

@@ -1,6 +1,6 @@
 import { trimChar } from "../utils";
 import { default as routes, IRouteStructures, IRouteStructure } from "./routes";
-import { type Props } from "./index";
+import { type Props } from "./components/AppLink";
 
 const isObject = (v: any): v is object => typeof v === "object";
 

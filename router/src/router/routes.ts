@@ -17,7 +17,7 @@ export type IRouteStructures = readonly IRouteStructure[];
 const routes = [
   { name: "Home", path: "/", component: () => import(/* webpackChunkName: 'home_page' */ "../pages/Home") },
 
-  { name: "About", path: "/about/:user_id", component: () => import(/* webpackChunkName: 'about_page' */ "../pages/About") },
+  { name: "About", path: "/about", component: () => import(/* webpackChunkName: 'about_page' */ "../pages/About") },
 
   {
     name: "Books",

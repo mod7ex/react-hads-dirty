@@ -3,7 +3,8 @@ import { Routes, Route, Link, NavLink } from "react-router-dom";
 import Home from "./pages/Home";
 import BooksRoute from "./router/Books";
 import Redirect from "./pages/Redirect";
-import { AppNavLink } from "./router";
+import AppNavLink from "./router/components/AppNavLink";
+import AppLink from "./router/components/AppLink";
 // import About from "./pages/About";
 
 const LazyAbout = lazy(() => import(/* webpackChunkName: 'about_page' */ "./pages/About"));
@@ -41,15 +42,19 @@ function App() {
             </AppNavLink>
           </li>
           <li>
-            <Link to="/about" state={{ message: "hi" }}>
+            {/* <Link to="/about" state={{ message: "hi" }}>
               about (some state)
-            </Link>
+            </Link> */}
+
+            <AppLink to={{ name: "About" }} state={{ message: "hi" }}>
+              about (some state)
+            </AppLink>
           </li>
           <li>
-            <Link to="/not-allowed-so-redirect-to-home">not-allowed</Link>
+            <AppLink to="/not-allowed-so-redirect-to-home">not-allowed</AppLink>
           </li>
           <li>
-            <Link to="/somerandom">no page</Link>
+            <AppLink to="/somerandom">no page</AppLink>
           </li>
         </ul>
       </nav>
