@@ -1,5 +1,3 @@
-import React from "react";
-import { NavLink, type NavLinkProps } from "react-router-dom";
 import { trimChar } from "../utils";
 import { default as routes, IRouteStructures, IRouteStructure, TRoutes, TRoute } from "./routes";
 
@@ -7,7 +5,6 @@ const isObject = (v: any): v is object => typeof v === "object";
 
 type RouteNames<T extends IRouteStructures> = T[number]["name"] | (T[number] extends infer U ? (U extends { readonly children: infer C extends readonly any[] } ? RouteNames<C> & string : never) : never);
 
-// @ts-ignore
 type PossibleRouteNames = RouteNames<TRoutes>;
 
 type ParamPicker<T extends `${string}`> = T extends `${string}:${infer P}/${infer R}` ? P | ParamPicker<R> : T extends `${string}:${infer P}` ? P : never;
@@ -16,13 +13,9 @@ type RoutePath<T extends IRouteStructures, N extends PossibleRouteNames, I exten
   ? never
   : (T[I["length"]]["name"] extends N ? T[I["length"]]["path"] : T[I["length"]] extends infer U extends { readonly children: readonly any[] } ? `${T[I["length"]]["path"]}/${RoutePath<U["children"], N>}` : never) | RoutePath<T, N, [...I, I["length"]]>;
 
-type Params<N extends PossibleRouteNames> = ParamPicker<RoutePath<TRoutes, N>>;
+export type Params<N extends PossibleRouteNames> = ParamPicker<RoutePath<TRoutes, N>>;
 
-interface Props<N extends PossibleRouteNames> extends Omit<NavLinkProps, "to"> {
-  to: string | ({ name: N; query?: Record<string, string | number> } & (Params<N> extends never ? unknown : { params: Record<Params<N>, string | number> }));
-}
-
-const getRouteByName = <N extends PossibleRouteNames>(name: N, the_routes?: IRouteStructures): number[] | void => {
+export const getRouteByName = <N extends PossibleRouteNames>(name: N, the_routes?: IRouteStructures): number[] | void => {
   if (Array.isArray(the_routes)) {
     for (let i = 0; i < the_routes.length; i++) {
       let _route = the_routes[i] as IRouteStructure;
@@ -37,7 +30,7 @@ const getRouteByName = <N extends PossibleRouteNames>(name: N, the_routes?: IRou
   }
 };
 
-const getPath = (arr: IRouteStructures | undefined, indexes: number[]): string => {
+export const getPath = (arr: IRouteStructures | undefined, indexes: number[]): string => {
   let _indexes = [...indexes];
 
   if (_indexes.length && arr) {
@@ -51,7 +44,7 @@ const getPath = (arr: IRouteStructures | undefined, indexes: number[]): string =
   return "";
 };
 
-const payloadToStringPath = <N extends PossibleRouteNames>(payload: Props<N>["to"]) => {
+export const payloadToStringPath = <N extends PossibleRouteNames>(payload: Props<N>["to"]) => {
   const _to = payload;
   let to = "";
 
@@ -83,12 +76,4 @@ const payloadToStringPath = <N extends PossibleRouteNames>(payload: Props<N>["to
   }
 
   return to;
-};
-
-export const AppNavLink = <N extends PossibleRouteNames>(props: Props<N>) => {
-  const to = payloadToStringPath(props.to);
-
-  const _props = { ...props, to };
-
-  return <NavLink {..._props} />;
 };

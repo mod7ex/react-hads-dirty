@@ -36,7 +36,7 @@ function App() {
               {({ isActive }) => (isActive ? "You are in Books page" : "Books")}
             </NavLink> */}
 
-            <AppNavLink style={({ isActive }) => ({ color: isActive ? "red" : "blue" })} to={{ name: "Book" }}>
+            <AppNavLink style={({ isActive }) => ({ color: isActive ? "red" : "blue" })} to={{ name: "Book", params: { id: 3 }, query: { order: "name" } }}>
               {({ isActive }) => (isActive ? "You are in Books page" : "Books")}
             </AppNavLink>
           </li>
