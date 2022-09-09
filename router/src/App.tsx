@@ -5,6 +5,7 @@ import BooksRoute from "./router/Books";
 import Redirect from "./pages/Redirect";
 import AppNavLink from "./router/components/AppNavLink";
 import AppLink from "./router/components/AppLink";
+import AppRoute from "./router/components/AppRoute";
 // import About from "./pages/About";
 
 const LazyAbout = lazy(() => import(/* webpackChunkName: 'about_page' */ "./pages/About"));
@@ -22,7 +23,8 @@ function App() {
 
       {/* <Routes location="/books"> */}
       <Routes>
-        <Route path="/books" element={<h2>Extra content</h2>} />
+        {/* https://stackoverflow.com/a/69869761/13278193 */}
+        <Route element={<AppRoute path={{ name: "Books" }} element={<h3>Some content</h3>} />} />
       </Routes>
 
       <nav>
@@ -60,7 +62,8 @@ function App() {
       </nav>
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route element={<AppRoute path={{ name: "Home" }} element={<Home />} />} />
 
         <Route path="/books/*" element={<BooksRoute />} />
 

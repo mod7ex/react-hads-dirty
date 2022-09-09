@@ -32,4 +32,6 @@ declare global {
         ) | RoutePath<T, N, [...I, I["length"]]>;
 
     type Params<N extends PossibleRouteNames> = ParamPicker<RoutePath<TRoutes, N>>;
+
+    type To<N extends PossibleRouteNames> = string | ({ name: N; query?: Record<string, string | number> } & (Params<N> extends never ? unknown : { params: Record<Params<N>, string | number> }));
 }

@@ -1,10 +1,15 @@
 import { trimChar } from "../utils";
 import { default as routes, IRouteStructures, IRouteStructure } from "./routes";
-import { type Props } from "./components/AppLink";
 
-const isObject = (v: any): v is object => typeof v === "object";
+/**
+ * We adopt this approach in case of an incorrect route name ...
+ * the output will be '/' Home, we could have change the output
+ * depending on our needs
+ */
 
-export const getRouteByName = <N extends PossibleRouteNames>(name: N, the_routes?: IRouteStructures): number[] | void => {
+export const isObject = (v: any): v is object => typeof v === "object";
+
+export const routePathIndexes = <N extends PossibleRouteNames>(name: N, the_routes?: IRouteStructures): number[] | void => {
   if (Array.isArray(the_routes)) {
     for (let i = 0; i < the_routes.length; i++) {
       let _route = the_routes[i] as IRouteStructure;
@@ -12,7 +17,7 @@ export const getRouteByName = <N extends PossibleRouteNames>(name: N, the_routes
       if (_route.name === name) return [i];
 
       if (_route.children) {
-        let _i = getRouteByName(name, _route.children);
+        let _i = routePathIndexes(name, _route.children);
         if (_i !== undefined) return [i, ..._i];
       }
     }
@@ -33,31 +38,42 @@ export const getPath = (arr: IRouteStructures | undefined, indexes: number[]): s
   return "";
 };
 
-export const payloadToStringPath = <N extends PossibleRouteNames>(payload: Props<N>["to"]) => {
+export const payloadToStringTemplate = <N extends PossibleRouteNames>(name: N) => {
+  let to = "";
+
+  let way = routePathIndexes(name, routes);
+
+  if (way) {
+    to = getPath(routes, way);
+
+    to = `/${trimChar(to, "/")}`;
+  }
+
+  return to;
+};
+
+export const payloadToStringPath = <N extends PossibleRouteNames>(payload: To<N>) => {
   let to = "";
 
   if (isObject(payload)) {
     // @ts-ignore
     const { name, params, query } = payload;
 
-    let way = getRouteByName(name, routes);
+    to = payloadToStringTemplate(name);
 
-    if (way) {
-      to = getPath(routes, way);
+    if (params) {
+      Object.entries(params).forEach(([param_name, param_value]) => {
+        // Possible Fix
+        to = to.replace(`/:${param_name}`, `/${param_value}`);
+      });
+    }
 
-      if (params) {
-        Object.entries(params).forEach(([param_name, param_value]) => {
-          to = to.replace(`/:${param_name}/`, `/${param_value}/`);
-        });
-      }
+    to = `/${trimChar(to, "/")}`;
 
-      to = `/${trimChar(to, "/")}`;
+    if (query) {
+      let _query_string = Object.entries(query).map(([query_param_name, query_param_value]) => `${query_param_name}=${query_param_value}`);
 
-      if (query) {
-        let _query_string = Object.entries(query).map(([query_param_name, query_param_value]) => `${query_param_name}=${query_param_value}`);
-
-        to += `?${_query_string.join("&")}`;
-      }
+      to += `?${_query_string.join("&")}`;
     }
   } else {
     to = payload;

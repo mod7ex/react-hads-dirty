@@ -1,16 +1,24 @@
-import { Route, type RouteProps } from "react-router-dom";
-import { payloadToStringPath } from "../helpers";
+import { Route, type PathRouteProps, type LayoutRouteProps, type IndexRouteProps } from "react-router-dom";
+import { isObject, payloadToStringTemplate } from "../helpers";
 
-export interface Props<N extends PossibleRouteNames> extends Omit<RouteProps, "to"> {
-  to: string | ({ name: N; query?: Record<string, string | number> } & (Params<N> extends never ? unknown : { params: Record<Params<N>, string | number> }));
+export interface Props<N extends PossibleRouteNames> extends Omit<PathRouteProps | LayoutRouteProps | IndexRouteProps, "path"> {
+  path?: string | { name: N };
 }
 
-const AppLink = <N extends PossibleRouteNames>(props: Props<N>) => {
-  const to = payloadToStringPath(props.to);
+const AppRoute = <N extends PossibleRouteNames>(props: Props<N>) => {
+  let path: string | undefined = "";
 
-  const _props = { ...props, to };
+  if (isObject(props.path)) {
+    const { name } = props.path;
+
+    path = payloadToStringTemplate(name);
+  } else {
+    path = props.path;
+  }
+
+  const _props = { ...props, path };
 
   return <Route {..._props} />;
 };
 
-export default AppLink;
+export default AppRoute;
