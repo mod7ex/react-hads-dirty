@@ -20,23 +20,34 @@ function App() {
 
       {/* <Routes location="/books"> */}
       <Routes>
-        <Route path="/books" element={<h2>Extra content</h2>} />
+        {/* <Route path="/books" element={<h2>Extra content</h2>} /> */}
+        <Route path={window.$to_template("Books")} element={<h2>Extra content</h2>} />
       </Routes>
 
       <nav>
         <ul>
           <li>
-            <Link to="/" reloadDocument>
+            {/* <Link to="/" reloadDocument>
+              home
+            </Link> */}
+            <Link to={window.$to({ name: "Home" })} reloadDocument>
               home
             </Link>
           </li>
           <li>
-            <NavLink style={({ isActive }) => ({ color: isActive ? "red" : "blue" })} to="/books">
+            {/* <NavLink style={({ isActive }) => ({ color: isActive ? "red" : "blue" })} to="/books">
+              {({ isActive }) => (isActive ? "You are in Books page" : "Books")}
+            </NavLink> */}
+            <NavLink style={({ isActive }) => ({ color: isActive ? "red" : "blue" })} to={window.$to({ name: "Books" })}>
               {({ isActive }) => (isActive ? "You are in Books page" : "Books")}
             </NavLink>
           </li>
           <li>
-            <Link to="/about" state={{ message: "hi" }}>
+            {/* <Link to="/about" state={{ message: "hi" }}>
+              about (some state)
+            </Link> */}
+
+            <Link to={window.$to({ name: "About" })} state={{ message: "hi" }}>
               about (some state)
             </Link>
           </li>
@@ -50,9 +61,9 @@ function App() {
       </nav>
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path={window.$to_template("Home")} element={<Home />} />
 
-        <Route path="/books/*" element={<BooksRoute />} />
+        <Route path={window.$to_template("Books", true)} element={<BooksRoute />} />
 
         {/*
             <Route path="/books" element={<BooksLayout />}>
@@ -62,7 +73,7 @@ function App() {
             </Route>
         */}
 
-        <Route path="/about" element={<SuspenseLazyAbout />} />
+        <Route path={window.$to_template("About")} element={<SuspenseLazyAbout />} />
         <Route path="/not-allowed-so-redirect-to-home" element={<Redirect />} />
         <Route path="/*" element={<h1>404 Not found</h1>} />
       </Routes>

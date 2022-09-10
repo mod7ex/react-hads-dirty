@@ -10,8 +10,8 @@ export default function BooksRoute() {
       <Routes>
         <Route element={<BooksLayout />}>
           <Route index element={<Books />} />
-          <Route path=":id" element={<Book />} />
-          <Route path="new" element={<NewBook />} />
+          <Route path={window.$path("Book")} element={<Book />} />
+          <Route path={window.$path("NewBook")} element={<NewBook />} />
         </Route>
       </Routes>
     </>
