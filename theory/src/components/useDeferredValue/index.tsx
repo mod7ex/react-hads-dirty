@@ -13,7 +13,7 @@ export default function UseDeferredValue() {
     <>
       <input type="text" value={input} onChange={handelChange} />
       {/* Commented just for bug */}
-      {/* <List input={input} /> */}
+      <List input={input} />
     </>
   );
 }
