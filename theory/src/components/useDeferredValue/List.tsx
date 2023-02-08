@@ -8,7 +8,7 @@ const LIST_SIZE = 20000;
 
 function List({ input }: { input: string }) {
   // it sounds like a proxy that will deferre changes till it's time (few seconds...)
-  // we use <useDeferredValue> hook in situations where input is comming from above and we don't have controll to set it
+  // we use <useDeferredValue> hook in situations where input is comming from above and we don't have controll to state setter
   const deferredInput = useDeferredValue(input); 
 
   const list = useMemo(() => {
